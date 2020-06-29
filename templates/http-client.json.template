@@ -1,0 +1,13 @@
+${jsonencode({
+  "service": {
+    "name": "${client_service_name}",
+    "port": "${client_service_port}",
+    "connect": { "sidecar_service": {
+      "proxy": {
+        "upstreams": [
+          {
+            "destination_name": "${upstream_name}",
+            "local_bind_port": "${upstream_port}",
+	          "local_bind_address": "127.0.0.1"
+  }]}}}
+}})}

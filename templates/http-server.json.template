@@ -1,0 +1,18 @@
+${jsonencode({
+  "service": {
+    "name": "${server_service_name}",
+    "port": "${server_service_port}",
+    "checks": [
+      {
+        "id": "http-server",
+        "name" : "HTTP GET on port 80",
+        "http": "http://localhost:80",
+        "method": "GET",
+        "interval": "10s",
+        "timeout": "1s"
+      }
+    ],
+    "connect": {"sidecar_service": {
+  }}
+  }
+  })}

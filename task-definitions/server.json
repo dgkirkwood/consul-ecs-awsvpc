@@ -1,0 +1,76 @@
+[
+    {
+      "name": "envoy-s",
+      "image": "nicholasjackson/consul-envoy",
+      "cpu": 10,
+      "memory": 100,
+      "essential": true,
+      "networkMode": "awsvpc",
+      "portMappings": [
+        {
+          "containerPort": 21100,
+          "hostPort": 21100
+        }
+      ],
+      "environment": [
+          {"name" : "CONSUL_HTTP_ADDR" , "value" : "127.0.0.1:8500"},
+          {"name" : "CONSUL_GRPC_ADDR" , "value" : "127.0.0.1:8502"},
+          {"name" : "SERVICE_CONFIG" , "value" : "config/server.hcl"}
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "envoy-s",
+          "containerPath": "/config"
+        }
+      ],
+      "command": ["consul", "connect", "envoy", "-sidecar-for", "http-server"]
+    },
+    {
+      "name": "consul-agent",
+      "image": "consul:1.7.3",
+      "cpu": 10,
+      "memory": 100,
+      "essential": true,
+      "networkMode": "awsvpc",
+      "portMappings": [
+        {
+          "containerPort": 8500,
+          "hostPort": 8500
+        },
+        {
+          "containerPort": 8502,
+          "hostPort": 8502
+        },
+        {
+          "containerPort": 8301,
+          "hostPort": 8301
+        }
+      ],
+      "environment": [
+        {"name" : "CONSUL_BIND_INTERFACE" , "value" : "eth0"},
+        {"name" : "CONSUL_CLIENT_INTERFACE" , "value" : "lo"}
+    ],
+      "mountPoints": [
+        {
+          "sourceVolume": "consul",
+          "containerPath": "/consul/config"
+        }
+      ],
+      "command": ["agent", "-retry-join=10.0.101.100"]
+    },
+    {
+        "name": "server",
+        "image": "hashicorp/http-echo:latest",
+        "cpu": 10,
+        "memory": 25,
+        "essential": true,
+        "networkMode": "awsvpc",
+        "portMappings": [
+          {
+            "containerPort": 80,
+            "hostPort": 80
+          }
+        ],
+        "command": ["-text=\"hello world\"", "-listen=:80"]
+      }
+  ]
