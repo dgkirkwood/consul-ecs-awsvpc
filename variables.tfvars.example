@@ -1,0 +1,13 @@
+cluster_name = "my-ecs-cluster"
+
+aws_region = "ap-southeast-2"
+
+aws_az = "ap-southeast-2a"
+
+consul_instance_size = "t2.micro"
+
+ecs_instance_size = "t2.small"
+
+aws_ec2_key = "my-key-name"
+
+private_key_path = "/path/to/my/.ssh/key"
