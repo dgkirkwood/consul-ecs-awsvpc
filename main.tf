@@ -35,17 +35,17 @@ resource "aws_instance" "consul-server" {
     #User data field to grab Consul binary, create necessary directories and start agent with config
     #Relies on the file provisioner in the same resource
     user_data = <<EOF
-        #!/bin/bash
-        wget https://releases.hashicorp.com/consul/1.8.0/consul_1.8.0_linux_amd64.zip
-        sudo apt install unzip
-        unzip consul_1.8.0_linux_amd64.zip
-        sudo mv consul /usr/local/bin/
-        sudo mkdir /opt/consul/
-        sudo mkdir /opt/consul/config
-        sudo mkdir /opt/consul/data
-        sudo mv /home/ubuntu/serverconfig.hcl /opt/consul/config
-        sudo consul agent -config-file=/opt/consul/config/serverconfig.hcl
-        EOF
+#!/bin/bash
+wget https://releases.hashicorp.com/consul/1.8.0/consul_1.8.0_linux_amd64.zip
+sudo apt install unzip
+unzip consul_1.8.0_linux_amd64.zip
+sudo mv consul /usr/local/bin/
+sudo mkdir /opt/consul/
+sudo mkdir /opt/consul/config
+sudo mkdir /opt/consul/data
+sudo mv /home/ubuntu/serverconfig.hcl /opt/consul/config
+sudo consul agent -config-file=/opt/consul/config/serverconfig.hcl
+EOF
     #Copy the config file to the server
     provisioner "file" {
       source      = "configs/serverconfig.hcl"
@@ -106,12 +106,12 @@ resource "aws_instance" "ecs-server" {
 
     #User data string required to populate ENV vars which will auto register this instance with our ECS cluster
     user_data = <<EOF
-      #!/bin/bash
-      echo ECS_CLUSTER=${var.cluster_name} >> /etc/ecs/ecs.config
-      echo ECS_INSTANCE_ATTRIBUTES={\"purchase-option\":\"ondemand\"} >> /etc/ecs/ecs.config
+#!/bin/bash
+echo ECS_CLUSTER=${var.cluster_name} >> /etc/ecs/ecs.config
+echo ECS_INSTANCE_ATTRIBUTES={\"purchase-option\":\"ondemand\"} >> /etc/ecs/ecs.config
 
 
-      EOF
+EOF
 
     #Provisioner to copy across config files which will be presented as volumes for containers managed by ECS
     provisioner "file" {

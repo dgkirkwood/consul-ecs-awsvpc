@@ -1,4 +1,4 @@
-datacenter = "aws-ap-southeast-2"
+datacenter = "aws"
 data_dir = "/opt/consul/data"
 server = true
 ui = true

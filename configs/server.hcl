@@ -1,0 +1,1 @@
+{"service":{"checks":[{"http":"http://localhost:80","id":"http-server","interval":"10s","method":"GET","name":"HTTP GET on port 80","timeout":"1s"}],"connect":{"sidecar_service":{}},"name":"http-server","port":80}}

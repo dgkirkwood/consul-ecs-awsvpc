@@ -11,6 +11,6 @@ resource "local_file" "http-client" {
 }
 
 resource "local_file" "consul-agent-config" {
-    content     = templatefile("templates/consul-agent-config.json.template", {consul_dc=var.aws_region})
+    content     = templatefile("templates/consul-agent-config.json.template", {consul_dc="aws"})
     filename = "configs/config.json"
 }
