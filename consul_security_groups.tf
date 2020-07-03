@@ -1,4 +1,4 @@
-# Allow EC2 instances to receive HTTP/HTTPS/SSH traffic IN and any traffic OUT
+#Security groups applied to the Consul server
 resource "aws_security_group" "consul" {
   name_prefix = "${var.cluster_name}_consul"
   description = "Security group for Consul server"

@@ -1,4 +1,4 @@
-# Allow EC2 instances to receive HTTP/HTTPS/SSH traffic IN and any traffic OUT
+# Security groups applied to my EC2 instances
 resource "aws_security_group" "sg_for_ec2_instances" {
   name_prefix = "${var.cluster_name}_sg_for_ec2_instances_"
   description = "Security group for EC2 instances within the cluster"
@@ -52,7 +52,7 @@ resource "aws_security_group_rule" "allow_egress_all" {
   "0.0.0.0/0"]
 }
 
-
+#Allow all possible Envoy ports for inter-service communication
 resource "aws_security_group_rule" "envoy_ports" {
   from_port         = 21000
   protocol          = "tcp"

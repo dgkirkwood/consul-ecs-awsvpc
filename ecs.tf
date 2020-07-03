@@ -1,3 +1,7 @@
+resource "aws_ecs_cluster" "ecs_cluster" {
+  name = var.cluster_name
+}
+
 resource "aws_ecs_task_definition" "server" {
   family = "serviceMeshAppServer"
   container_definitions = file("task-definitions/server.json")
@@ -19,7 +23,6 @@ resource "aws_ecs_service" "http-server" {
   cluster = aws_ecs_cluster.ecs_cluster.id
   desired_count = 3
   task_definition = "${aws_ecs_task_definition.server.family}:${max("${aws_ecs_task_definition.server.revision}", "${data.aws_ecs_task_definition.server.revision}")}"
-  #task_definition = aws_ecs_task_definition.server.family
   network_configuration {
     security_groups = [aws_security_group.sg_for_ec2_instances.id]
     subnets         = [module.vpc.public_subnets[0]]
@@ -53,7 +56,6 @@ resource "aws_ecs_service" "http-client" {
   cluster = aws_ecs_cluster.ecs_cluster.id
   desired_count = 1
   task_definition = "${aws_ecs_task_definition.client.family}:${max("${aws_ecs_task_definition.client.revision}", "${data.aws_ecs_task_definition.client.revision}")}"
-  #task_definition = aws_ecs_task_definition.server.family
   network_configuration {
     security_groups = [aws_security_group.sg_for_ec2_instances.id]
     subnets         = [module.vpc.public_subnets[0]]
