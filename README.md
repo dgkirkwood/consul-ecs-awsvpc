@@ -104,8 +104,9 @@ You have just demonstrated a working service mesh on ECS! To prove we are perfor
 5. Click 'Save'
 
 \
-You should see a green 'Success' message appear, and your intention listed on the intentions page.\
+You should see a green 'Success' message appear, and your intention listed on the intentions page.
 
+\
 6. Go back to your SSH session, and run the same docker exec command 
 ```
 docker exec -it <replace-me-with-client-container-name> curl 127.0.0.1:8085
