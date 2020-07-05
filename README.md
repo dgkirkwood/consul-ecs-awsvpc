@@ -6,8 +6,7 @@ Using Consul service mesh we can also provide automated mTLS between microservic
 
 ## Getting Started
 
-* This repository uses Terraform to create everything needed in the demo environment. 
-* The code requires a few variables (detailed below) and will instantiate a Consul server two microservices which will automatically register and become part of the mesh. 
+This repository uses Terraform to create everything needed in the demo environment. The code requires a few variables (detailed below) and will instantiate a Consul server two microservices which will automatically register and become part of the mesh. 
 
 ### Prerequisites
 
@@ -17,12 +16,10 @@ Using Consul service mesh we can also provide automated mTLS between microservic
 
 ### Terraform Variables
 
-An example variables file is included in the repo named variables.tfvars.example.
-Copy this file and rename it to terraform.tfvars
-
-Populate the variables, making sure that the Availability Zone you choose is valid for the region.
-Also ensure you choose appropriate size instances. The defaults are t2.micro for Consul and t2.small for the ECS servers.
-The reason t2.small is used is because it can provide more Elastic Network Interfaces (ENIs) which are assigned to the ECS tasks. 
+* An example variables file is included in the repo named variables.tfvars.example. Copy this file and rename it to terraform.tfvars
+* Populate the variables, making sure that the Availability Zone you choose is valid for the region.
+* Also ensure you choose appropriate size instances. The defaults are t2.micro for Consul and t2.small for the ECS servers.
+* The reason t2.small is used is because it can provide more Elastic Network Interfaces (ENIs) which are assigned to the ECS tasks. 
 
 ### Creating the environment
 
