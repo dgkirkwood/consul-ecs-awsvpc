@@ -80,7 +80,9 @@ ssh -i /path/to/privatekey ec2-user@xx.xx.xx.xx
 ```
 docker ps
 ```
-You are looking for a container running the image tutum/curl:latest with a name like ecs-serviceMeshAppClient-17-client-ecb99b9194f7f4e2a901\
+You are looking for a container running the image tutum/curl:latest with a name like ecs-serviceMeshAppClient-17-client-ecb99b9194f7f4e2a901
+
+\
 3. Once you find the container, execute a curl using the following commmand: 
 ```
 docker exec -it <replace-me-with-client-container-name> curl 127.0.0.1:8085
