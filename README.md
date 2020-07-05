@@ -54,9 +54,14 @@ ecs_server_2-public_ip =
 ecs_server_public_ip = 
 ```
 
-### Break down into end to end tests
+### Connect to Consul
 
-Explain what these tests test and why
+Port 8500 of the Consul server is exposed for the GUI service linked above. 
+Paste the link into a browser and you should see Consul running with three services registered
+* Consul itself
+* http-client: 1 Instance
+* http-server: 3 Instances
+Each instance of the server and client corresponds with an ECS task that was created as part of your Terraform apply. 
 
 ```
 Give an example
