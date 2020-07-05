@@ -6,7 +6,7 @@ Using Consul service mesh we can also provide automated mTLS between microservic
 
 ## Getting Started
 
-This repository uses Terraform to create everything needed in the demo environment. The code requires a few variables (detailed below) and will instantiate a Consul server two microservices which will automatically register and become part of the mesh. 
+This repository uses Terraform to create everything needed in the demo environment. The code requires a few variables (detailed below) and will instantiate a Consul server and two microservices which will automatically register and become part of the mesh. 
 
 ### Prerequisites
 
@@ -103,6 +103,7 @@ If you have, you have just demonstrated a working service mesh on ECS! To prove 
 
 \
 You should see a green 'Success' message appear, and your intention listed on the intentions page.\
+
 6. Go back to your SSH session, and run the same docker exec command 
 ```
 docker exec -it <replace-me-with-client-container-name> curl 127.0.0.1:8085
