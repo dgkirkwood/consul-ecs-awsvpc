@@ -89,7 +89,7 @@ You should see the following:
 ```
 "hello world"
 ```
-If you have, you have just demonstrated a working service mesh on ECS! To prove we are performing authorized connections, lets block connection between the client and the server, following the steps below
+If you have, you have just demonstrated a working service mesh on ECS! To prove we are performing authorized connections, lets block connection between the client and the server, following the steps below.
 
 
 
@@ -100,8 +100,9 @@ If you have, you have just demonstrated a working service mesh on ECS! To prove 
 3. For source service select 'http-client' and for destination service select 'http-server'
 4. Keep the default radio button selection on 'Deny'
 5. Click 'Save'
+
 \
-You should see a green 'Success' message appear, and your intention listed on the intentions page. \
+You should see a green 'Success' message appear, and your intention listed on the intentions page.
 6. Go back to your SSH session, and run the same docker exec command 
 ```
 docker exec -it <replace-me-with-client-container-name> curl 127.0.0.1:8085
