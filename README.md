@@ -6,18 +6,18 @@ Using Consul service mesh we can also provide automated mTLS between microservic
 
 ## Getting Started
 
-This repository uses Terraform to create everything needed in the demo environment. 
-The code requires a few variables (detailed below) and will instantiate a Consul server two microservices which will automatically register and become part of the mesh. 
+* This repository uses Terraform to create everything needed in the demo environment. 
+* The code requires a few variables (detailed below) and will instantiate a Consul server two microservices which will automatically register and become part of the mesh. 
 
 ### Prerequisites
 
-Ensure you have the [Terraform](https://www.terraform.io/downloads.html) binary installed on your local machine 
-You will need the appropriate credentials for Terraform to provision on AWS. [Instructions here](https://www.terraform.io/docs/providers/aws/index.html)
-You will need an EC2 key pair created on AWS as it is a required variable for provisioning your infrastructure. (Hint: you can do this with Terraform!) Ensure the private key is in a known local path as this is another required variable
+* Ensure you have the [Terraform](https://www.terraform.io/downloads.html) binary installed on your local machine 
+* You will need the appropriate credentials for Terraform to provision on AWS. [Instructions here](https://www.terraform.io/docs/providers/aws/index.html).
+* You will need an EC2 key pair created on AWS as it is a required variable for provisioning your infrastructure. (Hint: you can do this with Terraform!) Ensure the private key is in a known local path as this is another required variable
 
 ### Terraform Variables
 
-An example variables file is included in the repo named variables.tfvars.example
+An example variables file is included in the repo named variables.tfvars.example.
 Copy this file and rename it to terraform.tfvars
 
 Populate the variables, making sure that the Availability Zone you choose is valid for the region.
