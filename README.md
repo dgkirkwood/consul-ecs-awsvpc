@@ -91,7 +91,7 @@ You should see the following:
 ```
 "hello world"
 ```
-If you have, you have just demonstrated a working service mesh on ECS! To prove we are performing authorized connections, lets block connection between the client and the server, following the steps below.
+You have just demonstrated a working service mesh on ECS! To prove we are performing authorized connections, lets block connection between the client and the server, following the steps below.
 
 
 
