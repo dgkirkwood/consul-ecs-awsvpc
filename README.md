@@ -45,11 +45,14 @@ terraform apply
 ```
 
 
-End with an example of getting some data out of the system or using it for a little demo
+## Connect to the environment
 
-## Running the tests
-
-Explain how to run the automated tests for this system
+If step 4 of creating the environment colmpleted succesfully, you should have three output items on your CLI:
+```
+consul_gui = 
+ecs_server_2-public_ip = 
+ecs_server_public_ip = 
+```
 
 ### Break down into end to end tests
 
