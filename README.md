@@ -61,6 +61,8 @@ Paste the link into a browser and you should see Consul running with three servi
 * Consul itself
 * http-client: 1 Instance
 * http-server: 3 Instances\
+
+\
 Each instance of the server and client corresponds with an ECS task that was created as part of your Terraform apply. 
 
 ```
