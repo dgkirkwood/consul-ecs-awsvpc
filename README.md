@@ -60,7 +60,7 @@ Port 8500 of the Consul server is exposed for the GUI service linked above.
 Paste the link into a browser and you should see Consul running with three services registered
 * Consul itself
 * http-client: 1 Instance
-* http-server: 3 Instances\
+* http-server: 3 Instances
 
 \
 Each instance of the server and client corresponds with an ECS task that was created as part of your Terraform apply.\
@@ -71,59 +71,48 @@ Explore the GUI to see the associated proxies and health checks on each service.
 To show the functioning service mesh we need to connect to an ECS host running the client service. 
 This is not necessarily deterministic, but try SSHing to either one of your ECS servers, using the IP address exposed as an output from Terraform. 
 
+1. SSH to an ECS host
+
 ```
 ssh -i /path/to/privatekey ec2-user@xx.xx.xx.xx
 ```
-Once you are on the ECS host take a look at the docker containers running on the host
+2. Inspect the docker containers running on the host
 ```
 docker ps
 ```
 You are looking for a container running the image tutum/curl:latest with a name like ecs-serviceMeshAppClient-17-client-ecb99b9194f7f4e2a901\
-Once you find the container, execute a curl using the following commmand: 
+3. Once you find the container, execute a curl using the following commmand: 
 ```
 docker exec -it <replace-me-with-client-container-name> curl 127.0.0.1:8085
 ```
-
-
-
-### And coding style tests
-
-Explain what these tests test and why
-
+You should see the following:
 ```
-Give an example
+"hello world"
 ```
+If you have, you have just demonstrated a working service mesh on ECS! To prove we are performing authorized connections, lets block connection between the client and the server, following the steps below
 
-## Deployment
 
-Add additional notes about how to deploy this on a live system
 
-## Built With
+### Test Consul intentions
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+1. Go back to the Consul GUI and click the Intentions top menu item
+2. Click the blue 'Create' button
+3. For source service select 'http-client' and for destination service select 'http-server'
+4. Keep the default radio button selection on 'Deny'
+5. Click 'Save'
+\
+You should see a green 'Success' message appear, and your intention listed on the intentions page. \
+6. Go back to your SSH session, and run the same docker exec command 
+```
+docker exec -it <replace-me-with-client-container-name> curl 127.0.0.1:8085
+```
+7. You should now get an error with an empty reply from the server. The service mesh proxies have stopped the connection as per your intention. 
 
-## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+## Spin down your environment
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+Terraform makes it very easy to get rid of this environment when we are done. Simply run: 
+```
+terraform destroy
+```
+Type yes to confirm and Terraform will remove all of your resources. 
