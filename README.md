@@ -63,11 +63,28 @@ Paste the link into a browser and you should see Consul running with three servi
 * http-server: 3 Instances\
 
 \
-Each instance of the server and client corresponds with an ECS task that was created as part of your Terraform apply. 
+Each instance of the server and client corresponds with an ECS task that was created as part of your Terraform apply.\
+Explore the GUI to see the associated proxies and health checks on each service.
+
+### Connect to the Client service
+
+To show the functioning service mesh we need to connect to an ECS host running the client service. 
+This is not necessarily deterministic, but try SSHing to either one of your ECS servers, using the IP address exposed as an output from Terraform. 
 
 ```
-Give an example
+ssh -i /path/to/privatekey ec2-user@xx.xx.xx.xx
 ```
+Once you are on the ECS host take a look at the docker containers running on the host
+```
+docker ps
+```
+You are looking for a container running the image tutum/curl:latest with a name like ecs-serviceMeshAppClient-17-client-ecb99b9194f7f4e2a901\
+Once you find the container, execute a curl using the following commmand: 
+```
+docker exec -it <replace-me-with-client-container-name> curl 127.0.0.1:8085
+```
+
+
 
 ### And coding style tests
 
