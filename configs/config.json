@@ -1,1 +1,0 @@
-{"server": false,"datacenter": "aws","connect": {"enabled": true},"ports": {"grpc": 8502} }
